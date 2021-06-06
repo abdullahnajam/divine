@@ -53,7 +53,6 @@ class _DetailViewState extends State<DetailView> {
           Ingredients ingredients = new Ingredients(
             individualKey,
             DATA[individualKey]['title'],
-            DATA[individualKey]['image'],
             DATA[individualKey]['quantity'].toString(),
           );
           ingredientList.add(ingredients);
@@ -225,19 +224,6 @@ class _DetailViewState extends State<DetailView> {
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: BoxFit.fitHeight,
-                                                image: NetworkImage(snapshot.data[index].image),
-
-                                              )
-                                          ),
-                                        ),
-                                      ),
                                       Expanded(
                                         flex: 7,
                                         child: Text(snapshot.data[index].title),

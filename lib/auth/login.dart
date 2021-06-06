@@ -1,4 +1,5 @@
 import 'package:divine/auth/register.dart';
+import 'package:divine/bottom_navigation.dart';
 import 'package:divine/components/form_error.dart';
 import 'package:divine/screens/home.dart';
 import 'package:divine/values/constants.dart';
@@ -118,7 +119,7 @@ class _LoginState extends State<Login> {
                                       print('User is currently signed out!');
                                     } else {
                                       print('User is signed in!');
-                                      Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: HomePage()));
+                                      Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: BottomBar()));
 
                                     }
                                   });

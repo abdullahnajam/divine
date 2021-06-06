@@ -1,6 +1,8 @@
 import 'package:divine/about.dart';
 import 'package:divine/auth/login.dart';
+import 'package:divine/contact_us.dart';
 import 'package:divine/favourites.dart';
+import 'package:divine/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:divine/data/img.dart';
@@ -33,9 +35,15 @@ class MenuDrawerState extends State<MenuDrawer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 30,),
-          Container(
-            alignment: Alignment.center,
-            child: Image.asset("assets/images/logo.png",height: 150,),
+          InkWell(
+            onTap: (){
+              Navigator.pushReplacement(context, new MaterialPageRoute(
+                  builder: (context) => HomePage()));
+            },
+            child: Container(
+              alignment: Alignment.center,
+              child: Image.asset("assets/images/logo.png",height: 150,),
+            ),
           ),
 
           InkWell(onTap: (){
@@ -54,7 +62,8 @@ class MenuDrawerState extends State<MenuDrawer> {
           ),
           Container(height: 10),
           InkWell(onTap: (){
-
+            Navigator.pushReplacement(context, new MaterialPageRoute(
+                builder: (context) => ContactUs()));
           },
             child: Container(height: 40, padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -109,7 +118,7 @@ class MenuDrawerState extends State<MenuDrawer> {
               children: <Widget>[
                 Image.network("https://img.icons8.com/office/16/000000/instagram-new.png",width: 20,height: 20,),
                 Container(width: 20),
-                Expanded(child: Text("Instagram", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
+                Expanded(child: Text("DivineCookingAndBaking_", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
               ],
             ),
           ),
@@ -119,7 +128,7 @@ class MenuDrawerState extends State<MenuDrawer> {
               children: <Widget>[
                 Image.network("https://img.icons8.com/officel/16/000000/youtube-play.png",width: 20,height: 20,),
                 Container(width: 20),
-                Expanded(child: Text("youtube", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
+                Expanded(child: Text("DivineCookingBaking", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
               ],
             ),
           ),
@@ -129,7 +138,7 @@ class MenuDrawerState extends State<MenuDrawer> {
               children: <Widget>[
                 Image.network("https://img.icons8.com/ultraviolet/40/000000/facebook-new.png",width: 20,height: 20,),
                 Container(width: 20),
-                Expanded(child: Text("facebook", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
+                Expanded(child: Text("DivineCookingAndBaking", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
               ],
             ),
           ),

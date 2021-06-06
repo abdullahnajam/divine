@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:divine/auth/login.dart';
 import 'package:divine/auth/register.dart';
+import 'package:divine/bottom_navigation.dart';
 import 'package:divine/screens/home.dart';
 import 'package:divine/values/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     }
     else{
-      Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: HomePage()));
+      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: BottomBar()));
     }
 
   }

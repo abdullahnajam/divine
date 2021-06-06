@@ -1,3 +1,4 @@
+import 'package:divine/bottom_navigation.dart';
 import 'package:divine/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -110,7 +111,7 @@ class _RegisterState extends State<Register> {
                                       print('User is currently signed out!');
                                     } else {
                                       print('User is signed in!');
-                                      Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: HomePage()));
+                                      Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: BottomBar()));
                                     }
                                   });
                                 });

@@ -1,8 +1,10 @@
 import 'dart:ui';
 import 'package:divine/values/constants.dart';
+import 'package:divine/widget/my_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'data/my_colors.dart';
 import 'menu_drawer.dart';
 
 class AboutUs extends StatefulWidget {
@@ -20,8 +22,6 @@ class _AboutUsState extends State<AboutUs> {
 
     return Scaffold(
         backgroundColor: Colors.grey[200],
-        key: _drawerKey,
-        drawer: MenuDrawer(),
         body: SafeArea(
           child: Column(
             children: [
@@ -40,7 +40,6 @@ class _AboutUsState extends State<AboutUs> {
                       child: Container(
                         margin: EdgeInsets.only(left: 15),
                         alignment: Alignment.centerLeft,
-                        child: Icon(Icons.menu,color: primaryColor,)
                       ),
                       onTap: ()=>_openDrawer(),
                     ),
@@ -71,7 +70,41 @@ class _AboutUsState extends State<AboutUs> {
                         padding: EdgeInsets.all(5),
                         child: Text('Divine Cooking & Baking is here to provide you recipes and help you cook delicious food with less stress and more joy. Will help you with a variety of recipes ranging from Pakistani, Indian & Continental food, Veg & Non , hot and cold drinks etc.We also offer recipes and cooking advice.'),
                       ),
+                      Container(
+                        margin: EdgeInsets.all(20),
+                        child: Text("Social Media",style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600),),
 
+                      ),
+                      Container(
+                        height: 40, padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: <Widget>[
+                            Image.network("https://img.icons8.com/office/16/000000/instagram-new.png",width: 20,height: 20,),
+                            Container(width: 20),
+                            Expanded(child: Text("DivineCookingAndBaking_", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 40, padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: <Widget>[
+                            Image.network("https://img.icons8.com/officel/16/000000/youtube-play.png",width: 20,height: 20,),
+                            Container(width: 20),
+                            Expanded(child: Text("DivineCookingBaking", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 40, padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: <Widget>[
+                            Image.network("https://img.icons8.com/ultraviolet/40/000000/facebook-new.png",width: 20,height: 20,),
+                            Container(width: 20),
+                            Expanded(child: Text("DivineCookingAndBaking", style: MyText.body2(context).copyWith(color: MyColors.grey_80))),
+                          ],
+                        ),
+                      ),
                       SizedBox(height: 10,),
                       Container(
                           decoration: BoxDecoration(
@@ -92,7 +125,7 @@ class _AboutUsState extends State<AboutUs> {
                                   Text("info@divinecookingandbaking.com",style: TextStyle(color: Colors.white),),
                                 ],
                               ),
-                              
+
                               SizedBox(height: 5,),
 
                             ],

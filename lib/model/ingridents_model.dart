@@ -1,5 +1,5 @@
 class Ingredients{
-  String id,title,image,quantity;
+  String id,title,quantity;
 
-  Ingredients(this.id, this.title, this.image, this.quantity);
+  Ingredients(this.id, this.title,this.quantity);
 }

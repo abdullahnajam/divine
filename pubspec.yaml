@@ -40,6 +40,12 @@ dependencies:
   youtube_player_flutter: ^7.0.0+7
   http: any
   onesignal_flutter: ^2.4.0
+  flutter_launcher_icons: ^0.8.1
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
 
 dev_dependencies:
   flutter_test:

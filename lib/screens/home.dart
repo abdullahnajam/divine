@@ -1,9 +1,11 @@
+import 'package:divine/auth/login.dart';
 import 'package:divine/model/category.dart';
 import 'package:divine/model/recipe.dart';
 import 'package:divine/screens/detailView.dart';
 import 'package:divine/search_list.dart';
 import 'package:divine/values/constants.dart';
 import 'package:divine/video/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String category="";
+  String category="All Recipes";
   List<Category> categoryList=[];
   List<Recipe> recipeList=[];
 
@@ -48,6 +50,12 @@ class _HomePageState extends State<HomePage> {
 
         }
       }
+    });
+  }
+  void logout()async{
+    await FirebaseAuth.instance.signOut().whenComplete((){
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (BuildContext context) => Login()));
     });
   }
   getSelectedRecipeList(String id) async {
@@ -106,11 +114,43 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
+
+  getAllRecipeList() async {
+    List<Recipe> AllList=[];
+    final databaseReference = FirebaseDatabase.instance.reference();
+    await databaseReference.child("recipe").once().then((DataSnapshot dataSnapshot){
+
+      if(dataSnapshot.value!=null){
+        var KEYS= dataSnapshot.value.keys;
+        var DATA=dataSnapshot.value;
+
+        for(var individualKey in KEYS) {
+          Recipe recipe = new Recipe(
+            individualKey,
+            DATA[individualKey]['name'],
+            DATA[individualKey]['type'],
+            DATA[individualKey]['direction'],
+            DATA[individualKey]['thumbnail'],
+            DATA[individualKey]['url'],
+          );
+          setState(() {
+            AllList.add(recipe);
+          });
+
+
+        }
+      }
+    });
+    setState(() {
+      recipeList=AllList;
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Category category=new Category("0", "All Videos", "https://icon-library.com/images/all-icon/all-icon-0.jpg");
+    Category category=new Category("0", "All Recipes",
+        "https://firebasestorage.googleapis.com/v0/b/divine-3030e.appspot.com/o/country%2Fpicturetopeople.org-cd19f1dc671cdf38d6585a9cfc6f90177488a785fe48e2be97.png?alt=media&token=00a03000-e497-4202-9af5-0a9b820921f5");
     categoryList.add(category);
     getRecipeList();
 
@@ -121,8 +161,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _drawerKey,
-        drawer: MenuDrawer(),
       body: Container(
         child:Column(
           children: [
@@ -139,12 +177,17 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 30,),
-                  Row(
-                    children: [
-                      IconButton(icon: Icon(Icons.menu,color: Colors.white,), onPressed: _openDrawer),
-                      Text("Divine - Cooking & Baking",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500),),
+                  Container(
+                    margin: EdgeInsets.only(left: 10,right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
 
-                    ],
+                        Text("Divine - Cooking & Baking",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500),),
+                        IconButton(icon: Icon(Icons.logout,color: Colors.white,), onPressed: logout),
+
+                      ],
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
@@ -190,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                           return GestureDetector(
                             onTap: (){
                               if(index==0){
-                                getRecipeList();
+                                getAllRecipeList();
                               }
                               else{
                                 getSelectedRecipeList(categoryList[index].id);
@@ -202,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               height: 70,
                               margin: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-                              child: Image.network(categoryList[index].image),
+                              child: Image.network(categoryList[index].image,height: 50,width: 50,),
 
                               decoration: BoxDecoration(
                                   color: backgroundColorLight,
